@@ -1,59 +1,64 @@
 <h1>Premier League API 2.0</h1>
-	<p>This is an unofficial Premier League API client for pulling player stats, fixtures, tables, and results data from the Premier League. The API is built using Flask, and the data is scraped from the Premier League website.</p>
+  <p>This is an unofficial Flask API for current Premier League player stats, fixtures, and standings. Player data comes from the Premier League API; fixtures and standings are scraped from OneFootball.</p>
 
 
 <h2>API Endpoints</h2>
 
 <p>The application provides the following API endpoints:</p>
+<h3>GET /fixtures</h3>
+<p>Returns the fixtures currently listed on OneFootball's Premier League fixtures page.</p>
+
 <h3>GET  /players/{player_name}</h3>
-<p>This endpoint retrieves information about a Premier League player with the given name. The player name should be provided as a URL parameter.</p>
+<p>Returns profile information and current-season statistics for a current Premier League player. The player name should be provided as a URL parameter.</p>
 <p>The API returns a JSON object with the following structure:</p>
-<pre><code>[
-        {
-          'name': name, 
-          'position': position, 
-          'club': club, 
-          'Nationality': nationality, 
-          'Date of Birth': dob,
-          'height':height,
-          'key_stats': all_stats
-          }
-]</code></pre>
+<pre><code>{
+  "name": "Erling Haaland",
+  "position": "Centre Striker",
+  "club": "Manchester City",
+  "Nationality": "Norway",
+  "Date of Birth": "21 July 2000",
+  "Height": "195 cm",
+  "key_stats": { "appearances": 5, "goals": 5 }
+}</code></pre>
 
 
 <h3>GET /table</h3>
-<p>The JSON object contains an array of strings, where each string represents a team's position, name, number of games played, wins, draws, losses, goal difference, and total points.</p>
-<p>The API returns a JSON object with the following structure:</p>
-<pre><code>[
-      "Position",
-      "Team",
-      "Played",
-      "Wins",
-      "Draws",
-      "Losses",
-      "Goal Difference",
-      "Points"
-    ]</code></pre>
+<p>Returns a table array. The first row contains column names; subsequent rows contain each team's position, name, played, wins, draws, losses, goal difference, and points.</p>
 
 <h3>GET /fixtures/{team_name}</h3>
-<p>This endpoint retrieves information about the next Three Premier League fixtures of the team. The team name should be provided as a URL parameter.</p>
-<p>The API returns a JSON object with the following structure:</p>
-<pre><code>[ { "Team A vs Team B DD/MM/YYYY HH:MM", "Team A vs Team C DD/MM/YYYY HH:MM", "Team A vs Team D DD/MM/YYYY HH:MM"} ] </code></pre>
+<p>Filters the currently listed fixtures to those containing the requested team name.</p>
 
-<h2>Setup Details</h2>
-Follow the following instructions to run the application and start using the api in your local pc
-<li>Clone the repository</li>
-<li>Open the terminal, navigate to the folder where your clone of this repository is located and type:
-  
-  `$ pip install -r requirements.txt` </li>
+<h2>Instructions to run this repo</h2>
+<p>Install Python 3.11, open a terminal in the repository folder, then create and activate a virtual environment and install the dependencies:</p>
 
-<li> Type $ python main.py in the terminal and the script will run for as long as you let it. </li>
+```bat
+py -3.11 -m venv .venv
+.venv\Scripts\activate
+python -m pip install -r requirements.txt
+```
+
+<p>Start the Flask API:</p>
+
+```bat
+python main.py
+```
+
+<p>Keep that terminal open and visit <a href="http://127.0.0.1:5000/">http://127.0.0.1:5000/</a>. Example endpoints:</p>
+
+<ul>
+  <li><a href="http://127.0.0.1:5000/fixtures">/fixtures</a></li>
+  <li><a href="http://127.0.0.1:5000/fixtures/Arsenal">/fixtures/Arsenal</a></li>
+  <li><a href="http://127.0.0.1:5000/players/Haaland">/players/Haaland</a></li>
+  <li><a href="http://127.0.0.1:5000/table">/table</a></li>
+</ul>
+
+<p>Player lookup searches the current Premier League season. Stop the server with Ctrl+C.</p>
 
 
 
 <H2>Individual PLayer PL Stats</H2> 
 <ul>
-  <li>Example: Stats of Cristiano Ronaldo | One can use the common name of the Players as well to retrive the data</li>
+  <li>Example response for a current Premier League player. Player lookup accepts a name such as Haaland.</li>
   <br> <img src="assets/player_stats.png"><br>
 </ul>
  <H2>Premier League Table</H2> 
@@ -63,7 +68,7 @@ Follow the following instructions to run the application and start using the api
  </ul>
  <H2>Premier League Fixtures </H2> 
 <ul>
-  <li>Fixtures of the Next three weeks </li>
+  <li>Fixtures currently listed by OneFootball</li>
   <br> <img src="assets/fixtures.png"> <br>
  </ul>
 <H2>Update 🚀 </H2>

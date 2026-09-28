@@ -1,4 +1,3 @@
-import lxml
 import requests
 from bs4 import BeautifulSoup
 from googlesearch import search  # pip install googlesearch-python

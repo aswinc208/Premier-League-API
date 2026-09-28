@@ -1,8 +1,5 @@
-import lxml
 import requests
 from bs4 import BeautifulSoup
-import re
-import time
 
 link = f"https://onefootball.com/en/competition/premier-league-9/fixtures"
 source = requests.get(link).text
